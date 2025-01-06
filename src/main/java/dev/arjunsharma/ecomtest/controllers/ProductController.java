@@ -2,9 +2,7 @@ package dev.arjunsharma.ecomtest.controllers;
 
 import dev.arjunsharma.ecomtest.models.Product;
 import dev.arjunsharma.ecomtest.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product/{id}")
+    @GetMapping("/products/{id}")
     public Product GetSingleProduct(@PathVariable("id") Long id){
         Product productFromDB;
         productFromDB = productService.GetSingleProduct(id);
@@ -31,6 +29,14 @@ public class ProductController {
         productsFromDB = productService.GetAllProducts();
 
         return productsFromDB;
+    }
+
+    @PostMapping("/products")
+    public Product CreateProduct(@RequestBody Product productFromUser){
+        Product savedProduct;
+        savedProduct = productService.CreateProduct(productFromUser);
+
+        return savedProduct;
     }
 
 }

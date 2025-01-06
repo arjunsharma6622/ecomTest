@@ -56,4 +56,12 @@ public class ProductService {
 
         return productsFromDB;
     }
+
+    public Product CreateProduct(Product product){
+        //product.save()
+        Product savedProduct;
+        savedProduct = product;
+
+        return savedProduct;
+    }
 }

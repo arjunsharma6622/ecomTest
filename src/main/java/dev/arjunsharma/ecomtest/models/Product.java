@@ -1,9 +1,18 @@
 package dev.arjunsharma.ecomtest.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String name;
     private double price;
-    private Long id;
     private String image;
 
     public Product(String name, double price, Long id, String image) {
@@ -58,3 +67,21 @@ public class Product {
                 '}';
     }
 }
+
+// @Entity --
+
+// mysql driver, spring jpa, hibernate
+
+/* JPA --- if internal imp of dbs queries change
+   |
+   hibernate (ORM) --- predefined methods
+   |
+   different db's  -- actual query
+
+   selectXyz()
+
+   select $ from xyz; - mysql -----> selectXyz
+   choose all form xyz; - other db ------> selectXyz
+
+   object relational mapping
+*/

@@ -1,28 +1,34 @@
 package dev.arjunsharma.ecomtest.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Product extends BaseModel{
 
     private String name;
     private double price;
     private String image;
 
-    public Product(String name, double price, Long id, String image) {
+    @ManyToOne
+    private Category category;
+
+    public Product(String name, double price, String image, Category category) {
         this.name = name;
         this.price = price;
-        this.id = id;
         this.image = image;
+        this.category = category;
     }
 
     public Product() {
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public String getName() {
@@ -33,9 +39,6 @@ public class Product {
         return price;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getImage() {
         return image;
@@ -49,10 +52,6 @@ public class Product {
         this.price = price;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setImage(String image) {
         this.image = image;
     }
@@ -62,7 +61,7 @@ public class Product {
         return "Product{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", id=" + id +
+                ", id=" + getId() +
                 ", image='" + image + '\'' +
                 '}';
     }
